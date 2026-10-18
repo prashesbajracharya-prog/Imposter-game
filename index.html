@@ -90,11 +90,6 @@ button {
   border: 1px solid #41445c;
 }
 
-.hint-button {
-  background: #d9a441;
-  color: #17120a;
-}
-
 .hidden {
   display: none !important;
 }
@@ -110,7 +105,7 @@ button {
   margin-top: 12px;
 }
 
-/* Hint setting */
+/* Enable hints setting */
 .hint-setting {
   display: flex;
   align-items: center;
@@ -194,7 +189,7 @@ button {
   border: 1px solid #79612e;
   border-radius: 14px;
   padding: 14px;
-  margin-top: 14px;
+  margin-top: 18px;
 }
 
 #hintText {
@@ -272,22 +267,21 @@ footer {
       <option value="3">3 Imposters</option>
     </select>
 
-    <!-- NEW HINT OPTION -->
     <label class="hint-setting" for="enableHints">
       <span>
         <span class="setting-title">💡 Enable Hints</span>
-        <small>Allow imposters to see a clue about the secret word.</small>
+        <small>Show imposters a clue automatically when they reveal their role.</small>
       </span>
       <input type="checkbox" id="enableHints" checked>
     </label>
 
     <div id="setupError" class="error"></div>
-
     <button class="primary" onclick="startGame()">Start Game</button>
   </section>
 
   <!-- GAME -->
   <section id="game" class="panel hidden">
+
     <div class="small" id="turnLabel"></div>
 
     <div class="progress">
@@ -311,15 +305,9 @@ footer {
       <div class="role-label">Your secret role</div>
       <div id="roleText"></div>
 
-      <button
-        id="hintButton"
-        class="hint-button hidden"
-        onclick="toggleHint()">
-        💡 Show Hint
-      </button>
-
+      <!-- Hint appears automatically for imposters -->
       <div id="hintArea" class="hidden">
-        <div class="role-label">Your hint</div>
+        <div class="role-label">💡 Your Hint</div>
         <div id="hintText"></div>
       </div>
     </div>
@@ -553,7 +541,6 @@ let players = [];
 let secretWord = "";
 let currentPlayer = 0;
 let revealed = false;
-let hintVisible = false;
 let gameStarted = false;
 
 function shuffle(array) {
@@ -602,7 +589,6 @@ function startGame() {
   shuffle(players);
 
   const indexes = shuffle(players.map((_, i) => i)).slice(0, count);
-
   indexes.forEach(index => {
     players[index].isImposter = true;
   });
@@ -619,7 +605,6 @@ function startGame() {
 
 function showPlayer() {
   revealed = false;
-  hintVisible = false;
 
   document.getElementById("turnLabel").textContent =
     `PLAYER ${currentPlayer + 1} OF ${players.length}`;
@@ -632,8 +617,6 @@ function showPlayer() {
 
   document.getElementById("roleContent").classList.add("hidden");
   document.getElementById("hintArea").classList.add("hidden");
-  document.getElementById("hintButton").classList.add("hidden");
-  document.getElementById("hintButton").textContent = "💡 Show Hint";
   document.getElementById("nextButton").classList.add("hidden");
 }
 
@@ -648,46 +631,28 @@ function revealRole(event) {
   const hintsEnabled = document.getElementById("enableHints").checked;
 
   document.getElementById("roleContent").classList.remove("hidden");
+  document.getElementById("hintArea").classList.add("hidden");
 
   if (player.isImposter) {
     document.getElementById("roleText").textContent = "🕵️ IMPOSTER";
 
-    document.getElementById("hintButton").classList.toggle(
-      "hidden",
-      !hintsEnabled
-    );
+    if (hintsEnabled) {
+      document.getElementById("hintText").textContent =
+        WORD_HINTS[secretWord] ||
+        "Try to blend in and guess the word.";
 
-    document.getElementById("hintText").textContent =
-      WORD_HINTS[secretWord] ||
-      "Try to blend in and guess the word.";
+      document.getElementById("hintArea").classList.remove("hidden");
+    }
   } else {
     document.getElementById("roleText").textContent = "🟢 " + secretWord;
-    document.getElementById("hintButton").classList.add("hidden");
   }
 
   document.getElementById("nextButton").classList.remove("hidden");
 }
 
-function toggleHint() {
-  if (!revealed || !players[currentPlayer].isImposter) return;
-
-  hintVisible = !hintVisible;
-
-  document.getElementById("hintArea").classList.toggle(
-    "hidden",
-    !hintVisible
-  );
-
-  document.getElementById("hintButton").textContent =
-    hintVisible ? "🙈 Hide Hint" : "💡 Show Hint";
-}
-
 function hideRole() {
   document.getElementById("roleContent").classList.add("hidden");
   document.getElementById("hintArea").classList.add("hidden");
-
-  hintVisible = false;
-  document.getElementById("hintButton").textContent = "💡 Show Hint";
 }
 
 function nextPlayer() {

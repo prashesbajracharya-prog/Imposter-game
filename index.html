@@ -105,7 +105,6 @@ button {
   margin-top: 12px;
 }
 
-/* Enable hints setting */
 .hint-setting {
   display: flex;
   align-items: center;
@@ -247,6 +246,7 @@ footer {
 
     <label for="category">Choose category</label>
     <select id="category">
+      <option value="all">🎲 All Categories</option>
       <option value="food">🍕 Food</option>
       <option value="animals">🐾 Animals</option>
       <option value="places">🌍 Places</option>
@@ -305,7 +305,6 @@ footer {
       <div class="role-label">Your secret role</div>
       <div id="roleText"></div>
 
-      <!-- Hint appears automatically for imposters -->
       <div id="hintArea" class="hidden">
         <div class="role-label">💡 Your Hint</div>
         <div id="hintText"></div>
@@ -576,8 +575,12 @@ function startGame() {
     return;
   }
 
+  // Select from one category or combine every category.
   const category = document.getElementById("category").value;
-  const list = WORDS[category];
+
+  const list = category === "all"
+    ? Object.values(WORDS).flat()
+    : WORDS[category];
 
   secretWord = list[Math.floor(Math.random() * list.length)];
 
@@ -589,6 +592,7 @@ function startGame() {
   shuffle(players);
 
   const indexes = shuffle(players.map((_, i) => i)).slice(0, count);
+
   indexes.forEach(index => {
     players[index].isImposter = true;
   });

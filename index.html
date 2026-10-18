@@ -5,11 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Imposter Game</title>
+
 <style>
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
+
 body {
   margin: 0;
   padding: 22px 16px;
@@ -18,9 +20,21 @@ body {
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
-.container { max-width: 480px; margin: auto; }
-h1 { font-size: 36px; margin-bottom: 6px; }
-.subtitle, .small { color: #a7a8bd; }
+
+.container {
+  max-width: 480px;
+  margin: auto;
+}
+
+h1 {
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+
+.subtitle, .small {
+  color: #a7a8bd;
+}
+
 .panel {
   background: #1b1d2b;
   border: 1px solid #303246;
@@ -28,13 +42,15 @@ h1 { font-size: 36px; margin-bottom: 6px; }
   padding: 20px;
   margin: 16px 0;
 }
+
 label {
   display: block;
   text-align: left;
   margin: 16px 0 8px;
   font-weight: 600;
 }
-input, select, textarea {
+
+select, textarea {
   width: 100%;
   border: 1px solid #41445c;
   background: #11131e;
@@ -43,7 +59,13 @@ input, select, textarea {
   padding: 13px;
   font-size: 16px;
 }
-textarea { min-height: 130px; line-height: 1.6; }
+
+textarea {
+  min-height: 130px;
+  line-height: 1.6;
+  resize: vertical;
+}
+
 button {
   font-family: inherit;
   cursor: pointer;
@@ -56,12 +78,73 @@ button {
   margin-top: 12px;
   touch-action: manipulation;
 }
-.primary { background: #8b5cf6; color: white; }
-.secondary { background: #292c40; color: white; border: 1px solid #41445c; }
-.hint-button { background: #d9a441; color: #17120a; }
-.hidden { display: none !important; }
-.small { font-size: 14px; line-height: 1.5; }
-.error { color: #fca5a5; font-size: 14px; margin-top: 12px; }
+
+.primary {
+  background: #8b5cf6;
+  color: white;
+}
+
+.secondary {
+  background: #292c40;
+  color: white;
+  border: 1px solid #41445c;
+}
+
+.hint-button {
+  background: #d9a441;
+  color: #17120a;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.small {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.error {
+  color: #fca5a5;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+/* Hint setting */
+.hint-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  margin-top: 18px;
+  background: #11131e;
+  border: 1px solid #41445c;
+  border-radius: 14px;
+  text-align: left;
+}
+
+.hint-setting .setting-title {
+  font-weight: 700;
+}
+
+.hint-setting small {
+  display: block;
+  color: #a7a8bd;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: 5px;
+}
+
+.hint-setting input {
+  width: 23px;
+  height: 23px;
+  margin: 0;
+  accent-color: #8b5cf6;
+  flex-shrink: 0;
+}
+
 .progress {
   height: 6px;
   border-radius: 10px;
@@ -69,12 +152,14 @@ button {
   margin: 15px 0;
   overflow: hidden;
 }
+
 #progressBar {
   height: 100%;
   width: 0;
   background: #8b5cf6;
   transition: width .2s;
 }
+
 #playerName {
   min-height: 110px;
   font-size: 27px;
@@ -82,30 +167,28 @@ button {
   border: 2px solid #8b5cf6;
   touch-action: none;
 }
+
 #roleContent {
   margin-top: 16px;
   padding: 22px 12px;
   border-radius: 16px;
   background: #11131e;
 }
+
 .role-label {
   color: #a7a8bd;
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+
 #roleText {
   font-size: 30px;
   font-weight: 800;
   margin: 12px 0;
   overflow-wrap: anywhere;
 }
-#hintText {
-  color: #f6d58b;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-top: 12px;
-}
+
 #hintArea {
   background: #292317;
   border: 1px solid #79612e;
@@ -113,6 +196,14 @@ button {
   padding: 14px;
   margin-top: 14px;
 }
+
+#hintText {
+  color: #f6d58b;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
 .result-card {
   background: #11131e;
   padding: 15px;
@@ -120,27 +211,45 @@ button {
   border-radius: 14px;
   text-align: left;
 }
-.result-card strong { color: #c4b5fd; }
+
+.result-card strong {
+  color: #c4b5fd;
+}
+
 .result-word {
   font-size: 32px;
   font-weight: 800;
   color: #c4b5fd;
   overflow-wrap: anywhere;
 }
-#playerName, #roleContent, #roleContent *, #results, #results * {
+
+#playerName,
+#roleContent,
+#roleContent *,
+#results,
+#results * {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
 }
-footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
+
+footer {
+  margin: 28px 0 8px;
+  color: #74778f;
+  font-size: 12px;
+}
 </style>
 </head>
+
 <body>
 <div class="container">
+
   <h1>🕵️ Imposter</h1>
   <div class="subtitle">Find the player who doesn't know the word.</div>
 
+  <!-- SETUP -->
   <section id="setup" class="panel">
+
     <label for="category">Choose category</label>
     <select id="category">
       <option value="food">🍕 Food</option>
@@ -152,7 +261,8 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
     </select>
 
     <label for="playerNames">Player names</label>
-    <textarea id="playerNames" placeholder="One name per line&#10;Prakash&#10;Prashesh&#10;Suman"></textarea>
+    <textarea id="playerNames"
+      placeholder="One name per line&#10;Prakash&#10;Prashesh&#10;Suman"></textarea>
     <div class="small">Enter at least 3 players, one name per line.</div>
 
     <label for="imposterCount">Number of imposters</label>
@@ -162,16 +272,33 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
       <option value="3">3 Imposters</option>
     </select>
 
+    <!-- NEW HINT OPTION -->
+    <label class="hint-setting" for="enableHints">
+      <span>
+        <span class="setting-title">💡 Enable Hints</span>
+        <small>Allow imposters to see a clue about the secret word.</small>
+      </span>
+      <input type="checkbox" id="enableHints" checked>
+    </label>
+
     <div id="setupError" class="error"></div>
+
     <button class="primary" onclick="startGame()">Start Game</button>
   </section>
 
+  <!-- GAME -->
   <section id="game" class="panel hidden">
     <div class="small" id="turnLabel"></div>
-    <div class="progress"><div id="progressBar"></div></div>
+
+    <div class="progress">
+      <div id="progressBar"></div>
+    </div>
+
     <p class="small">Pass the phone to the player below.</p>
 
-    <button id="playerName" class="primary"
+    <button
+      id="playerName"
+      class="primary"
       onpointerdown="revealRole(event)"
       onpointerup="hideRole()"
       onpointerleave="hideRole()"
@@ -184,7 +311,10 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
       <div class="role-label">Your secret role</div>
       <div id="roleText"></div>
 
-      <button id="hintButton" class="hint-button hidden" onclick="toggleHint()">
+      <button
+        id="hintButton"
+        class="hint-button hidden"
+        onclick="toggleHint()">
         💡 Show Hint
       </button>
 
@@ -195,11 +325,16 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
     </div>
 
     <p class="small">Hold your name to see your role. Release to hide it.</p>
-    <button id="nextButton" class="secondary hidden" onclick="nextPlayer()">
+
+    <button
+      id="nextButton"
+      class="secondary hidden"
+      onclick="nextPlayer()">
       Hide &amp; Next Player →
     </button>
   </section>
 
+  <!-- RESULTS -->
   <section id="results" class="panel hidden">
     <h2>🎭 Game Ready!</h2>
     <p class="small">Discuss clues and find the imposters.</p>
@@ -208,14 +343,17 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
       <div class="small">THE SECRET WORD</div>
       <div id="resultWord" class="result-word"></div>
     </div>
+
     <div class="result-card">
       <strong>🕵️ Imposter(s)</strong>
       <div id="resultImposters"></div>
     </div>
+
     <div class="result-card">
       <strong>🎤 Who starts giving clues?</strong>
       <div id="starterName"></div>
     </div>
+
     <button class="primary" onclick="newGame()">Play Again</button>
     <button class="secondary" onclick="changeSettings()">Change Settings</button>
   </section>
@@ -225,69 +363,190 @@ footer { margin: 28px 0 8px; color: #74778f; font-size: 12px; }
 
 <script>
 const WORDS = {
-  food: ["Momo","Dal Bhat","Pizza","Burger","Sushi","Chow Mein","Sel Roti","Ice Cream","Chocolate","Pani Puri","Dumplings","Fried Rice","Sandwich","Pasta","Apple","Mango","Watermelon","Popcorn","French Fries","Noodles","Samosa","Thukpa"],
-  animals: ["Tiger","Lion","Elephant","Dog","Cat","Monkey","Giraffe","Zebra","Penguin","Dolphin","Crocodile","Rabbit","Horse","Bear","Fox","Wolf","Peacock","Eagle","Snake","Panda","Rhino","Red Panda","Yak","Deer"],
-  places: ["School","Hospital","Airport","Cinema","Restaurant","Beach","Mountain","Museum","Zoo","Shopping Mall","Library","Hotel","Temple","Park","Train Station","Stadium","Office","Bank","Bus Park","Market"],
-  objects: ["Phone","Laptop","Helmet","Umbrella","Watch","Camera","Chair","Mirror","Sunglasses","Wallet","Keys","Television","Headphones","Refrigerator","Toothbrush","Fan","Book","Pillow","Bicycle","Motorcycle","Remote Control","Charger"],
-  sports: ["Football","Cricket","Basketball","Badminton","Tennis","Volleyball","Swimming","Boxing","Wrestling","Golf","Table Tennis","Rugby","Hockey","Futsal","Marathon","Cycling","Archery","Kabaddi","Skateboarding","Skiing"],
-  nepal: ["Mount Everest","Kathmandu","Pokhara","Lumbini","Pashupatinath","Swayambhunath","Boudhanath","Chitwan","Janakpur","Mustang","Gurkha","Dashain","Tihar","Sel Roti","Dhaka Topi","Yomari","Rhino","Sagarmatha","Phewa Lake","Dharahara","Newari Khaja","Gai Jatra","Indra Jatra","Lhosar","Manakamana"]
+  food: [
+    "Momo", "Dal Bhat", "Pizza", "Burger", "Sushi",
+    "Chow Mein", "Sel Roti", "Ice Cream", "Chocolate",
+    "Pani Puri", "Dumplings", "Fried Rice", "Sandwich",
+    "Pasta", "Apple", "Mango", "Watermelon", "Popcorn",
+    "French Fries", "Noodles", "Samosa", "Thukpa"
+  ],
+
+  animals: [
+    "Tiger", "Lion", "Elephant", "Dog", "Cat", "Monkey",
+    "Giraffe", "Zebra", "Penguin", "Dolphin", "Crocodile",
+    "Rabbit", "Horse", "Bear", "Fox", "Wolf", "Peacock",
+    "Eagle", "Snake", "Panda", "Rhino", "Red Panda", "Yak", "Deer"
+  ],
+
+  places: [
+    "School", "Hospital", "Airport", "Cinema", "Restaurant",
+    "Beach", "Mountain", "Museum", "Zoo", "Shopping Mall",
+    "Library", "Hotel", "Temple", "Park", "Train Station",
+    "Stadium", "Office", "Bank", "Bus Park", "Market"
+  ],
+
+  objects: [
+    "Phone", "Laptop", "Helmet", "Umbrella", "Watch", "Camera",
+    "Chair", "Mirror", "Sunglasses", "Wallet", "Keys",
+    "Television", "Headphones", "Refrigerator", "Toothbrush",
+    "Fan", "Book", "Pillow", "Bicycle", "Motorcycle",
+    "Remote Control", "Charger"
+  ],
+
+  sports: [
+    "Football", "Cricket", "Basketball", "Badminton", "Tennis",
+    "Volleyball", "Swimming", "Boxing", "Wrestling", "Golf",
+    "Table Tennis", "Rugby", "Hockey", "Futsal", "Marathon",
+    "Cycling", "Archery", "Kabaddi", "Skateboarding", "Skiing"
+  ],
+
+  nepal: [
+    "Mount Everest", "Kathmandu", "Pokhara", "Lumbini",
+    "Pashupatinath", "Swayambhunath", "Boudhanath", "Chitwan",
+    "Janakpur", "Mustang", "Gurkha", "Dashain", "Tihar",
+    "Sel Roti", "Dhaka Topi", "Yomari", "Rhino", "Sagarmatha",
+    "Phewa Lake", "Dharahara", "Newari Khaja", "Gai Jatra",
+    "Indra Jatra", "Lhosar", "Manakamana"
+  ]
 };
 
 const WORD_HINTS = {
-  "Momo":"A popular steamed or fried food.",
-  "Dal Bhat":"A traditional Nepali meal.",
-  "Pizza":"Often round and sliced.",
-  "Burger":"Usually served in a bun.",
-  "Sushi":"A Japanese dish.",
-  "Chow Mein":"A noodle dish.",
-  "Sel Roti":"A traditional ring-shaped food.",
-  "Ice Cream":"A cold dessert.",
-  "Chocolate":"A sweet treat.",
-  "Pani Puri":"A crunchy street snack.",
-  "Tiger":"A large wild animal.",
-  "Lion":"Often called the king of the jungle.",
-  "Elephant":"A very large animal with a trunk.",
-  "Dog":"A common household pet.",
-  "Cat":"A pet that often purrs.",
-  "Monkey":"An animal that can climb trees.",
-  "Giraffe":"An animal with a long neck.",
-  "Penguin":"A bird that cannot fly.",
-  "Dolphin":"An intelligent sea animal.",
-  "Panda":"A bear that eats bamboo.",
-  "Red Panda":"A small animal found in the Himalayas.",
-  "Yak":"An animal associated with the Himalayas.",
-  "School":"A place where people learn.",
-  "Hospital":"A place for medical care.",
-  "Airport":"A place where planes arrive and depart.",
-  "Cinema":"A place to watch movies.",
-  "Beach":"A sandy place beside the sea.",
-  "Mountain":"A high natural landform.",
-  "Temple":"A place of worship.",
-  "Phone":"A device used to communicate.",
-  "Laptop":"A portable computer.",
-  "Helmet":"Protective headwear.",
-  "Umbrella":"Used in rain.",
-  "Watch":"Worn to tell time.",
-  "Camera":"Used to take photographs.",
-  "Football":"A sport played with a ball and goals.",
-  "Cricket":"A bat-and-ball sport.",
-  "Basketball":"A sport with hoops.",
-  "Badminton":"A racket sport played with a shuttlecock.",
-  "Futsal":"A form of indoor football.",
-  "Mount Everest":"The world's highest mountain.",
-  "Kathmandu":"The capital city of Nepal.",
-  "Pokhara":"A city famous for its lake and mountain views.",
-  "Lumbini":"The birthplace of Gautama Buddha.",
-  "Pashupatinath":"A famous Hindu temple in Nepal.",
-  "Swayambhunath":"A hilltop religious site in Kathmandu.",
-  "Boudhanath":"A famous Buddhist stupa.",
-  "Chitwan":"A place famous for wildlife.",
-  "Mustang":"A Himalayan region of Nepal.",
-  "Dashain":"A major Nepali festival.",
-  "Tihar":"A festival of lights in Nepal.",
-  "Dhaka Topi":"A traditional Nepali cap.",
-  "Yomari":"A traditional Newari delicacy.",
-  "Dharahara":"A famous tower in Kathmandu."
+  "Momo": "A popular steamed or fried food.",
+  "Dal Bhat": "A traditional Nepali meal.",
+  "Pizza": "Often round and sliced.",
+  "Burger": "Usually served in a bun.",
+  "Sushi": "A Japanese dish.",
+  "Chow Mein": "A noodle dish.",
+  "Sel Roti": "A traditional ring-shaped food.",
+  "Ice Cream": "A cold dessert.",
+  "Chocolate": "A sweet treat.",
+  "Pani Puri": "A crunchy street snack.",
+  "Dumplings": "Small parcels filled with food.",
+  "Fried Rice": "Rice cooked in a pan.",
+  "Sandwich": "Filling between slices of bread.",
+  "Pasta": "An Italian food often made from wheat.",
+  "Apple": "A fruit that can be red or green.",
+  "Mango": "A tropical fruit.",
+  "Watermelon": "A large fruit with watery flesh.",
+  "Popcorn": "A snack made from heated kernels.",
+  "French Fries": "Potatoes cut into strips and fried.",
+  "Noodles": "Long strands of food.",
+  "Samosa": "A triangular fried snack.",
+  "Thukpa": "A noodle soup popular in the Himalayas.",
+
+  "Tiger": "A large striped wild animal.",
+  "Lion": "Often called the king of the jungle.",
+  "Elephant": "A very large animal with a trunk.",
+  "Dog": "A common household pet.",
+  "Cat": "A pet that often purrs.",
+  "Monkey": "An animal that can climb trees.",
+  "Giraffe": "An animal with a long neck.",
+  "Zebra": "An animal with black and white stripes.",
+  "Penguin": "A bird that cannot fly.",
+  "Dolphin": "An intelligent sea animal.",
+  "Crocodile": "A reptile that lives near water.",
+  "Rabbit": "A small animal with long ears.",
+  "Horse": "An animal people can ride.",
+  "Bear": "A large, furry mammal.",
+  "Fox": "A clever animal with a bushy tail.",
+  "Wolf": "A wild animal related to dogs.",
+  "Peacock": "A bird known for its colorful feathers.",
+  "Eagle": "A bird of prey with sharp eyesight.",
+  "Snake": "A long reptile without legs.",
+  "Panda": "A bear that eats bamboo.",
+  "Rhino": "A large animal with a horn.",
+  "Red Panda": "A small animal found in the Himalayas.",
+  "Yak": "An animal associated with the Himalayas.",
+  "Deer": "An animal often known for its antlers.",
+
+  "School": "A place where people learn.",
+  "Hospital": "A place for medical care.",
+  "Airport": "A place where planes arrive and depart.",
+  "Cinema": "A place to watch movies.",
+  "Restaurant": "A place where people eat meals.",
+  "Beach": "A sandy place beside the sea.",
+  "Mountain": "A high natural landform.",
+  "Museum": "A place displaying historical objects.",
+  "Zoo": "A place where people see animals.",
+  "Shopping Mall": "A building with many shops.",
+  "Library": "A place full of books.",
+  "Hotel": "A place where travelers can stay.",
+  "Temple": "A place of worship.",
+  "Park": "An outdoor place to relax.",
+  "Train Station": "A place where trains stop.",
+  "Stadium": "A venue for sporting events.",
+  "Office": "A place where people work.",
+  "Bank": "A place that handles money.",
+  "Bus Park": "A place where buses arrive and depart.",
+  "Market": "A place where goods are bought and sold.",
+
+  "Phone": "A device used to communicate.",
+  "Laptop": "A portable computer.",
+  "Helmet": "Protective headwear.",
+  "Umbrella": "Used in rain.",
+  "Watch": "Worn to tell time.",
+  "Camera": "Used to take photographs.",
+  "Chair": "Something people sit on.",
+  "Mirror": "Shows your reflection.",
+  "Sunglasses": "Protect the eyes from bright sunlight.",
+  "Wallet": "Used to carry money and cards.",
+  "Keys": "Used to unlock things.",
+  "Television": "A screen for watching shows.",
+  "Headphones": "Used for private listening.",
+  "Refrigerator": "Keeps food cold.",
+  "Toothbrush": "Used for cleaning teeth.",
+  "Fan": "Moves air around a room.",
+  "Book": "Contains written or printed pages.",
+  "Pillow": "Used to support your head while sleeping.",
+  "Bicycle": "A two-wheeled vehicle powered by pedaling.",
+  "Motorcycle": "A motorized two-wheeled vehicle.",
+  "Remote Control": "Used to operate a device from a distance.",
+  "Charger": "Supplies power to a device.",
+
+  "Football": "A sport played with a ball and goals.",
+  "Cricket": "A bat-and-ball sport.",
+  "Basketball": "A sport with hoops.",
+  "Badminton": "A racket sport played with a shuttlecock.",
+  "Tennis": "A racket sport played over a net.",
+  "Volleyball": "A sport where teams hit a ball over a net.",
+  "Swimming": "Moving through water as a sport.",
+  "Boxing": "A combat sport involving punches.",
+  "Wrestling": "A sport involving grappling.",
+  "Golf": "A sport played with clubs and small balls.",
+  "Table Tennis": "A racket sport played on a table.",
+  "Rugby": "A contact team sport played with an oval ball.",
+  "Hockey": "A sport played with sticks.",
+  "Futsal": "A form of indoor football.",
+  "Marathon": "A long-distance running race.",
+  "Cycling": "Riding a bicycle as a sport.",
+  "Archery": "A sport involving a bow and arrows.",
+  "Kabaddi": "A team sport popular in South Asia.",
+  "Skateboarding": "Riding a board with wheels.",
+  "Skiing": "Sliding over snow on skis.",
+
+  "Mount Everest": "The world's highest mountain.",
+  "Kathmandu": "The capital city of Nepal.",
+  "Pokhara": "A city famous for its lake and mountain views.",
+  "Lumbini": "The birthplace of Gautama Buddha.",
+  "Pashupatinath": "A famous Hindu temple in Nepal.",
+  "Swayambhunath": "A hilltop religious site in Kathmandu.",
+  "Boudhanath": "A famous Buddhist stupa.",
+  "Chitwan": "A place famous for wildlife.",
+  "Janakpur": "A city associated with Janaki Temple.",
+  "Mustang": "A Himalayan region of Nepal.",
+  "Gurkha": "A place and name associated with Nepali soldiers.",
+  "Dashain": "A major Nepali festival.",
+  "Tihar": "A festival of lights in Nepal.",
+  "Dhaka Topi": "A traditional Nepali cap.",
+  "Yomari": "A traditional Newari delicacy.",
+  "Sagarmatha": "The Nepali name for Mount Everest.",
+  "Phewa Lake": "A famous lake in Pokhara.",
+  "Dharahara": "A famous tower in Kathmandu.",
+  "Newari Khaja": "A traditional Newari food spread.",
+  "Gai Jatra": "A traditional festival in Nepal.",
+  "Indra Jatra": "A traditional festival celebrated in Kathmandu.",
+  "Lhosar": "A New Year festival celebrated by several Himalayan communities.",
+  "Manakamana": "A famous temple in Nepal."
 };
 
 let players = [];
@@ -307,7 +566,10 @@ function shuffle(array) {
 
 function startGame() {
   const names = document.getElementById("playerNames").value
-    .split("\n").map(n => n.trim()).filter(Boolean);
+    .split("\n")
+    .map(name => name.trim())
+    .filter(Boolean);
+
   const count = Number(document.getElementById("imposterCount").value);
   const error = document.getElementById("setupError");
   error.textContent = "";
@@ -316,10 +578,12 @@ function startGame() {
     error.textContent = "Please enter at least 3 players.";
     return;
   }
-  if (new Set(names.map(n => n.toLowerCase())).size !== names.length) {
+
+  if (new Set(names.map(name => name.toLowerCase())).size !== names.length) {
     error.textContent = "Please use a different name for each player.";
     return;
   }
+
   if (count >= names.length) {
     error.textContent = "There must be at least one non-imposter.";
     return;
@@ -327,13 +591,21 @@ function startGame() {
 
   const category = document.getElementById("category").value;
   const list = WORDS[category];
+
   secretWord = list[Math.floor(Math.random() * list.length)];
 
-  players = names.map(name => ({name, isImposter: false}));
+  players = names.map(name => ({
+    name,
+    isImposter: false
+  }));
+
   shuffle(players);
 
-  const imposterIndexes = shuffle(players.map((_, i) => i)).slice(0, count);
-  imposterIndexes.forEach(i => players[i].isImposter = true);
+  const indexes = shuffle(players.map((_, i) => i)).slice(0, count);
+
+  indexes.forEach(index => {
+    players[index].isImposter = true;
+  });
 
   currentPlayer = 0;
   gameStarted = true;
@@ -341,6 +613,7 @@ function startGame() {
   document.getElementById("setup").classList.add("hidden");
   document.getElementById("results").classList.add("hidden");
   document.getElementById("game").classList.remove("hidden");
+
   showPlayer();
 }
 
@@ -350,9 +623,13 @@ function showPlayer() {
 
   document.getElementById("turnLabel").textContent =
     `PLAYER ${currentPlayer + 1} OF ${players.length}`;
+
   document.getElementById("progressBar").style.width =
     `${currentPlayer / players.length * 100}%`;
-  document.getElementById("playerName").textContent = players[currentPlayer].name;
+
+  document.getElementById("playerName").textContent =
+    players[currentPlayer].name;
+
   document.getElementById("roleContent").classList.add("hidden");
   document.getElementById("hintArea").classList.add("hidden");
   document.getElementById("hintButton").classList.add("hidden");
@@ -362,18 +639,27 @@ function showPlayer() {
 
 function revealRole(event) {
   if (!gameStarted || revealed) return;
+
   if (event) event.preventDefault();
 
   revealed = true;
+
   const player = players[currentPlayer];
+  const hintsEnabled = document.getElementById("enableHints").checked;
 
   document.getElementById("roleContent").classList.remove("hidden");
 
   if (player.isImposter) {
     document.getElementById("roleText").textContent = "🕵️ IMPOSTER";
-    document.getElementById("hintButton").classList.remove("hidden");
+
+    document.getElementById("hintButton").classList.toggle(
+      "hidden",
+      !hintsEnabled
+    );
+
     document.getElementById("hintText").textContent =
-      WORD_HINTS[secretWord] || "Try to blend in and guess the word.";
+      WORD_HINTS[secretWord] ||
+      "Try to blend in and guess the word.";
   } else {
     document.getElementById("roleText").textContent = "🟢 " + secretWord;
     document.getElementById("hintButton").classList.add("hidden");
@@ -383,16 +669,24 @@ function revealRole(event) {
 }
 
 function toggleHint() {
+  if (!revealed || !players[currentPlayer].isImposter) return;
+
   hintVisible = !hintVisible;
-  document.getElementById("hintArea").classList.toggle("hidden", !hintVisible);
+
+  document.getElementById("hintArea").classList.toggle(
+    "hidden",
+    !hintVisible
+  );
+
   document.getElementById("hintButton").textContent =
     hintVisible ? "🙈 Hide Hint" : "💡 Show Hint";
 }
 
 function hideRole() {
   document.getElementById("roleContent").classList.add("hidden");
-  hintVisible = false;
   document.getElementById("hintArea").classList.add("hidden");
+
+  hintVisible = false;
   document.getElementById("hintButton").textContent = "💡 Show Hint";
 }
 
@@ -411,13 +705,17 @@ function nextPlayer() {
 
 function showResults() {
   gameStarted = false;
+
   document.getElementById("game").classList.add("hidden");
   document.getElementById("results").classList.remove("hidden");
   document.getElementById("progressBar").style.width = "100%";
   document.getElementById("resultWord").textContent = secretWord;
 
   document.getElementById("resultImposters").textContent =
-    players.filter(p => p.isImposter).map(p => p.name).join(", ");
+    players
+      .filter(player => player.isImposter)
+      .map(player => player.name)
+      .join(", ");
 
   const starter = players[Math.floor(Math.random() * players.length)];
   document.getElementById("starterName").textContent = starter.name;
@@ -433,7 +731,7 @@ function changeSettings() {
   newGame();
 }
 
-// Prevent iPhone long-press text selection and context menus.
+// Prevent iPhone text selection and long-press menus.
 document.addEventListener("selectstart", function(event) {
   if (event.target.closest("#playerName, #roleContent, #results")) {
     event.preventDefault();
@@ -448,4 +746,3 @@ document.addEventListener("contextmenu", function(event) {
 </script>
 </body>
 </html>
-

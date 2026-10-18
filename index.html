@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Imposter Game</title>
 
 <style>
@@ -12,205 +12,227 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-body {
+html, body {
   margin: 0;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #10131c;
-  color: #f5f5f5;
-  font-family: Arial, sans-serif;
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #10111a;
+  color: white;
+  text-align: center;
+  padding: 22px 16px;
 }
 
 .container {
-  width: 100%;
   max-width: 480px;
-  padding: 25px;
-  border: 1px solid #303748;
-  border-radius: 22px;
-  background: #1a1f2c;
-  box-shadow: 0 15px 45px #0005;
+  margin: 0 auto;
 }
 
 h1 {
-  margin-top: 0;
-  text-align: center;
-  font-size: 30px;
+  font-size: 36px;
+  margin: 12px 0 6px;
 }
 
 .subtitle {
-  color: #aab3c5;
-  text-align: center;
-  line-height: 1.5;
+  color: #a7a8bd;
   margin-bottom: 25px;
+}
+
+.panel {
+  background: #1b1d2b;
+  border: 1px solid #303246;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 16px 0;
 }
 
 label {
   display: block;
+  text-align: left;
   margin: 16px 0 8px;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-textarea, select {
+input, select, textarea {
   width: 100%;
-  padding: 13px;
-  border: 1px solid #414b60;
-  border-radius: 10px;
-  background: #111621;
+  border: 1px solid #41445c;
+  background: #11131e;
   color: white;
+  border-radius: 12px;
+  padding: 13px;
   font-size: 16px;
+  outline: none;
 }
 
 textarea {
-  min-height: 125px;
+  min-height: 145px;
   resize: vertical;
-}
-
-button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 15px;
-  border: none;
-  border-radius: 11px;
-  background: #7967ff;
-  color: white;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-button.secondary {
-  background: #30394b;
-}
-
-button.danger {
-  background: #d94b65;
-}
-
-.screen {
-  display: none;
-}
-
-.screen.active {
-  display: block;
-}
-
-.card {
-  margin-top: 20px;
-  padding: 22px 18px;
-  border: 1px solid #343e52;
-  border-radius: 16px;
-  background: #111621;
-  text-align: center;
-}
-
-.small {
-  color: #aab3c5;
-  font-size: 14px;
-}
-
-.player-name {
-  margin: 18px 0;
-  font-size: 25px;
-  font-weight: bold;
-  overflow-wrap: anywhere;
-}
-
-.hold-button {
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: none;
-  background: #5143b7;
-  border: 2px solid #8b7cff;
-  min-height: 70px;
-  overflow-wrap: anywhere;
-}
-
-.hold-button:active {
-  background: #7967ff;
-}
-
-.role {
-  margin: 20px 0;
-  font-size: 29px;
-  font-weight: bold;
-  overflow-wrap: anywhere;
-}
-
-.imposter {
-  color: #ff687d;
-}
-
-.normal {
-  color: #65e6b0;
-}
-
-.hint {
-  margin-top: 12px;
-  color: #c7cee0;
   line-height: 1.6;
 }
 
-.counter {
-  margin-top: 18px;
-  color: #aab3c5;
-  text-align: center;
-  font-size: 14px;
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 14px;
+  padding: 15px 18px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  margin-top: 12px;
+  touch-action: manipulation;
+}
+
+.primary {
+  background: #8b5cf6;
+  color: white;
+}
+
+.secondary {
+  background: #292c40;
+  color: white;
+  border: 1px solid #41445c;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .hidden {
   display: none !important;
 }
 
-.notice {
-  margin-top: 15px;
-  padding: 13px;
-  border-radius: 10px;
-  background: #292544;
-  color: #d8d2ff;
+.small {
+  color: #a7a8bd;
+  font-size: 14px;
   line-height: 1.5;
-  text-align: center;
 }
 
-.starter {
-  margin: 20px 0;
-  padding: 20px;
-  border: 1px solid #7967ff;
-  border-radius: 14px;
-  background: #26213e;
-  text-align: center;
+.player-count {
+  color: #c4b5fd;
+  font-weight: 700;
+  margin-top: 12px;
 }
 
-.starter-name {
-  margin-top: 10px;
-  color: #c5bbff;
-  font-size: 28px;
-  font-weight: bold;
+#playerName,
+#roleContent,
+#roleText,
+#hintText,
+#results,
+#results * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+#playerName {
+  min-height: 115px;
+  font-size: 27px;
+  background: #292044;
+  border: 2px solid #8b5cf6;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#roleContent {
+  margin-top: 18px;
+  padding: 22px 12px;
+  border-radius: 16px;
+  background: #11131e;
+}
+
+.role-label {
+  color: #a7a8bd;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#roleText {
+  font-size: 30px;
+  font-weight: 800;
+  margin: 12px 0;
   overflow-wrap: anywhere;
 }
 
-.result-list {
-  padding-left: 22px;
-  line-height: 1.9;
+#hintText {
+  color: #c4b5fd;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.progress {
+  height: 6px;
+  border-radius: 10px;
+  background: #303246;
+  margin: 15px 0;
+  overflow: hidden;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  background: #8b5cf6;
+  transition: width 0.2s;
+}
+
+.result-word {
+  font-size: 32px;
+  font-weight: 800;
+  color: #c4b5fd;
+  overflow-wrap: anywhere;
+}
+
+.result-card {
+  background: #11131e;
+  padding: 15px;
+  margin-top: 12px;
+  border-radius: 14px;
   text-align: left;
+}
+
+.result-card strong {
+  color: #c4b5fd;
+}
+
+.error {
+  color: #fca5a5;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+footer {
+  margin: 28px 0 8px;
+  color: #74778f;
+  font-size: 12px;
 }
 </style>
 </head>
 
 <body>
-<main class="container">
+<div class="container">
 
-  <!-- SETUP -->
-  <section id="setupScreen" class="screen active">
-    <h1>🕵️ Imposter</h1>
-    <p class="subtitle">
-      Find the imposter without revealing the secret word.
-    </p>
+  <h1>🕵️ Imposter</h1>
+  <div class="subtitle">Find the player who doesn't know the word.</div>
 
-    <label for="playersInput">Player names</label>
-    <textarea id="playersInput" placeholder="Enter one name per line&#10;Prakash&#10;Prashesh&#10;Suman&#10;Nisha"></textarea>
+  <section id="setup" class="panel">
+    <label for="category">Choose category</label>
+    <select id="category">
+      <option value="food">🍕 Food</option>
+      <option value="animals">🐾 Animals</option>
+      <option value="places">🌍 Places</option>
+      <option value="objects">📦 Objects</option>
+      <option value="sports">⚽ Sports</option>
+      <option value="nepal">🇳🇵 Nepal</option>
+    </select>
+
+    <label for="playerNames">Player names</label>
+    <textarea id="playerNames" placeholder="Enter one name per line&#10;&#10;Prakash&#10;Prashesh&#10;Suman&#10;Nisha"></textarea>
+    <div class="small">Enter at least 3 players, one name per line.</div>
 
     <label for="imposterCount">Number of imposters</label>
     <select id="imposterCount">
@@ -219,459 +241,351 @@ button.danger {
       <option value="3">3 Imposters</option>
     </select>
 
-    <label for="categorySelect">Word category</label>
-    <select id="categorySelect">
-      <option value="all">All categories</option>
-      <option value="food">Food</option>
-      <option value="animals">Animals</option>
-      <option value="places">Places</option>
-      <option value="objects">Objects</option>
-      <option value="sports">Sports</option>
-      <option value="nepal">Nepal</option>
-    </select>
-
-    <button onclick="startGame()">Start Game</button>
+    <div id="setupError" class="error"></div>
+    <button class="primary" onclick="startGame()">Start Game</button>
   </section>
 
-  <!-- ROLE REVEAL -->
-  <section id="revealScreen" class="screen">
-    <h1>🤫 Secret Role</h1>
-    <p class="subtitle">
-      Pass the phone to the named player.
-      Hold your name to see your role.
-    </p>
-
-    <div class="card">
-      <div class="small" id="playerCounter"></div>
-
-      <button
-        id="playerName"
-        class="hold-button"
-        onpointerdown="revealRole(event)"
-        onpointerup="hideRole()"
-        onpointerleave="hideRole()"
-        onpointercancel="hideRole()"
-        oncontextmenu="return false"
-      >Hold Your Name to Reveal 👆</button>
-
-      <div id="roleContent" class="hidden">
-        <div class="small">Your role is</div>
-        <div id="roleText" class="role"></div>
-        <div id="hintText" class="hint"></div>
-      </div>
+  <section id="game" class="panel hidden">
+    <div class="small" id="turnLabel">PLAYER 1</div>
+    <div class="progress">
+      <div id="progressBar"></div>
     </div>
 
-    <button id="nextButton" class="secondary hidden" onclick="nextPlayer()">
-      Hide & Pass to Next Player
+    <p class="small">Pass the phone to the player below.</p>
+
+    <button
+      id="playerName"
+      class="primary"
+      onpointerdown="revealRole(event)"
+      onpointerup="hideRole()"
+      onpointerleave="hideRole()"
+      onpointercancel="hideRole()"
+      oncontextmenu="return false"
+      aria-label="Hold to reveal your role"
+    >
+      Hold to Reveal
     </button>
 
-    <div class="counter" id="passCounter">
-      Hold your name to reveal. Release to hide.
+    <div id="roleContent" class="hidden">
+      <div class="role-label">Your secret role</div>
+      <div id="roleText"></div>
+      <div id="hintText"></div>
     </div>
+
+    <p class="small">Keep holding to see your role. Release to hide it.</p>
+
+    <button id="nextButton" class="secondary hidden" onclick="nextPlayer()">
+      Hide &amp; Next Player →
+    </button>
   </section>
 
-  <!-- RESULTS -->
-  <section id="resultScreen" class="screen">
-    <h1>🎭 Game Ready!</h1>
-    <p class="subtitle">
-      Everyone has seen their role. Time to give clues!
-    </p>
+  <section id="results" class="panel hidden">
+    <h2>🎭 Game Ready!</h2>
+    <p class="small">Discuss clues and figure out who the imposters are.</p>
 
-    <div class="card">
-      <div class="small">Secret word</div>
-      <div id="resultWord" class="role normal"></div>
-
-      <div class="small">Imposter(s)</div>
-      <ul id="imposterNames" class="result-list"></ul>
+    <div class="result-card">
+      <div class="small">THE SECRET WORD</div>
+      <div id="resultWord" class="result-word"></div>
     </div>
 
-    <div class="starter">
-      <div class="small">🎲 Random player who starts giving clues</div>
-      <div id="starterName" class="starter-name"></div>
+    <div class="result-card">
+      <strong>🕵️ Imposter(s)</strong>
+      <div id="resultImposters"></div>
     </div>
 
-    <div class="notice">
-      Take turns giving clues. Don't say the secret word!
-      The imposter must try to blend in.
+    <div class="result-card">
+      <strong>🎤 Who starts giving clues?</strong>
+      <div id="starterName"></div>
     </div>
 
-    <button onclick="startNewRound()">Play Again</button>
-    <button class="secondary" onclick="showSetup()">Back to Setup</button>
+    <button class="primary" onclick="newGame()">Play Again</button>
+    <button class="secondary" onclick="changeSettings()">Change Settings</button>
   </section>
 
-</main>
+  <footer>Keep your role secret. Don't let anyone peek!</footer>
+</div>
 
 <script>
 const WORDS = {
   food: [
-    "Momo", "Pizza", "Burger", "Dal Bhat", "Chowmein",
-    "Sushi", "Ice Cream", "Sel Roti", "Chatpate", "Yomari",
-    "Pani Puri", "Thukpa", "Biryani", "Chocolate", "Pasta",
-    "Dumplings", "Sandwich", "Samosa", "Ramen", "Popcorn"
+    "Momo", "Dal Bhat", "Pizza", "Burger", "Sushi",
+    "Chow Mein", "Sel Roti", "Ice Cream", "Chocolate",
+    "Pani Puri", "Dumplings", "Fried Rice", "Sandwich",
+    "Pasta", "Apple", "Mango", "Watermelon", "Popcorn",
+    "French Fries", "Noodles", "Samosa", "Thukpa"
   ],
 
   animals: [
-    "Tiger", "Elephant", "Cat", "Dog", "Monkey",
-    "Rabbit", "Lion", "Panda", "Giraffe", "Horse",
-    "Cow", "Goat", "Crocodile", "Dolphin", "Eagle",
-    "Penguin", "Snake", "Fox", "Bear", "Peacock"
+    "Tiger", "Lion", "Elephant", "Dog", "Cat",
+    "Monkey", "Giraffe", "Zebra", "Penguin", "Dolphin",
+    "Crocodile", "Rabbit", "Horse", "Bear", "Fox",
+    "Wolf", "Peacock", "Eagle", "Snake", "Panda",
+    "Rhino", "Red Panda", "Yak", "Deer"
   ],
 
   places: [
-    "School", "Hospital", "Airport", "Cinema", "Beach",
-    "Restaurant", "Temple", "Museum", "Library", "Zoo",
-    "Park", "Shopping Mall", "Hotel", "Stadium", "Market",
-    "Mountain", "Train Station", "Office", "College", "Farm"
+    "School", "Hospital", "Airport", "Cinema",
+    "Restaurant", "Beach", "Mountain", "Museum",
+    "Zoo", "Shopping Mall", "Library", "Hotel",
+    "Temple", "Park", "Train Station", "Stadium",
+    "Office", "Bank", "Bus Park", "Market"
   ],
 
   objects: [
-    "Phone", "Laptop", "Watch", "Umbrella", "Mirror",
-    "Camera", "Helmet", "Chair", "Pillow", "Bottle",
-    "Keys", "Headphones", "Television", "Wallet", "Book",
-    "Sunglasses", "Fan", "Shoes", "Bag", "Toothbrush"
+    "Phone", "Laptop", "Helmet", "Umbrella", "Watch",
+    "Camera", "Chair", "Mirror", "Sunglasses", "Wallet",
+    "Keys", "Television", "Headphones", "Refrigerator",
+    "Toothbrush", "Fan", "Book", "Pillow", "Bicycle",
+    "Motorcycle", "Remote Control", "Charger"
   ],
 
   sports: [
-    "Football", "Cricket", "Basketball", "Tennis", "Badminton",
-    "Volleyball", "Swimming", "Boxing", "Golf", "Hockey",
-    "Rugby", "Cycling", "Wrestling", "Table Tennis", "Futsal",
-    "Running", "Archery", "Skiing", "Karate", "Baseball"
+    "Football", "Cricket", "Basketball", "Badminton",
+    "Tennis", "Volleyball", "Swimming", "Boxing",
+    "Wrestling", "Golf", "Table Tennis", "Rugby",
+    "Hockey", "Futsal", "Marathon", "Cycling",
+    "Archery", "Kabaddi", "Skateboarding", "Skiing"
   ],
 
   nepal: [
     "Mount Everest", "Kathmandu", "Pokhara", "Lumbini",
-    "Pashupatinath", "Dashain", "Tihar", "Dhaka Topi",
-    "Gundruk", "Sel Roti", "Rhododendron", "Yeti",
-    "Chitwan", "Janakpur", "Swayambhunath", "Fewa Lake",
-    "Sagarmatha", "Newari Khaja", "Boudhanath", "Laligurans"
+    "Pashupatinath", "Swayambhunath", "Boudhanath",
+    "Chitwan", "Janakpur", "Mustang", "Gurkha",
+    "Dashain", "Tihar", "Sel Roti", "Dhaka Topi",
+    "Yomari", "Rhino", "Sagarmatha", "Phewa Lake",
+    "Dharahara", "Newari Khaja", "Gai Jatra",
+    "Indra Jatra", "Lhosar", "Manakamana"
   ]
 };
 
 const WORD_HINTS = {
-  "Momo": "Steamed or fried snack",
-  "Pizza": "Cheesy baked food",
-  "Burger": "Fast food in a bun",
-  "Dal Bhat": "A common Nepali meal",
-  "Chowmein": "Stir-fried noodles",
-  "Sushi": "Japanese rice dish",
-  "Ice Cream": "Cold sweet dessert",
-  "Sel Roti": "Traditional Nepali ring-shaped food",
-  "Chatpate": "Spicy crunchy snack",
-  "Yomari": "Newari sweet dumpling",
-  "Pani Puri": "Crispy snack with flavored water",
-  "Thukpa": "Hot noodle soup",
-  "Biryani": "Spiced rice dish",
-  "Chocolate": "Sweet cocoa treat",
-  "Pasta": "Italian food made from dough",
-  "Dumplings": "Small filled parcels",
-  "Sandwich": "Filling between slices",
-  "Samosa": "Triangular fried snack",
-  "Ramen": "Japanese noodle soup",
-  "Popcorn": "Movie-time snack",
-
-  "Tiger": "Large striped wild cat",
-  "Elephant": "Animal with a trunk",
-  "Cat": "Small furry pet that purrs",
-  "Dog": "Loyal four-legged pet",
-  "Monkey": "Animal that climbs trees",
-  "Rabbit": "Small animal with long ears",
-  "Lion": "Big cat often called king of the jungle",
-  "Panda": "Black-and-white bear",
-  "Giraffe": "Tall animal with a long neck",
-  "Horse": "Animal people can ride",
-  "Cow": "Farm animal that gives milk",
-  "Goat": "Farm animal that climbs well",
-  "Crocodile": "Large reptile with powerful jaws",
-  "Dolphin": "Intelligent sea mammal",
-  "Eagle": "Large bird of prey",
-  "Penguin": "Bird that swims but cannot fly",
-  "Snake": "Long reptile without legs",
-  "Fox": "Clever wild animal",
-  "Bear": "Large furry wild animal",
-  "Peacock": "Bird known for its colorful tail",
-
-  "School": "Place where students learn",
-  "Hospital": "Place where sick people receive care",
-  "Airport": "Place where planes arrive and depart",
-  "Cinema": "Place to watch films",
-  "Beach": "Sandy place beside the sea",
-  "Restaurant": "Place where people eat out",
-  "Temple": "Place of worship",
-  "Museum": "Place displaying historical objects",
-  "Library": "Place full of books",
-  "Zoo": "Place where people see animals",
-  "Park": "Outdoor place for relaxation",
-  "Shopping Mall": "Building with many shops",
-  "Hotel": "Place where travelers stay",
-  "Stadium": "Place for large sports events",
-  "Market": "Place where people buy and sell",
-  "Mountain": "High natural landform",
-  "Train Station": "Place where trains stop",
-  "Office": "Place where many people work",
-  "College": "Place for higher education",
-  "Farm": "Place where crops or animals are raised",
-
-  "Phone": "Device for calls and messages",
-  "Laptop": "Portable personal computer",
-  "Watch": "Something worn to tell time",
-  "Umbrella": "Protects you from rain",
-  "Mirror": "Shows your reflection",
-  "Camera": "Device for taking pictures",
-  "Helmet": "Protective headgear",
-  "Chair": "Furniture for sitting",
-  "Pillow": "Soft item used while sleeping",
-  "Bottle": "Container for liquids",
-  "Keys": "Used to unlock things",
-  "Headphones": "Audio device worn on the ears",
-  "Television": "Screen for watching shows",
-  "Wallet": "Used to carry money and cards",
-  "Book": "Pages filled with writing",
-  "Sunglasses": "Protect eyes from bright sunlight",
-  "Fan": "Device that moves air",
-  "Shoes": "Worn on the feet",
-  "Bag": "Used to carry belongings",
-  "Toothbrush": "Used for cleaning teeth",
-
-  "Football": "Sport played by kicking a ball",
-  "Cricket": "Sport with bats, wickets and a ball",
-  "Basketball": "Sport involving hoops and a ball",
-  "Tennis": "Racket sport played over a net",
-  "Badminton": "Racket sport played with a shuttlecock",
-  "Volleyball": "Teams hit a ball over a net",
-  "Swimming": "Moving through water as a sport",
-  "Boxing": "Combat sport using punches",
-  "Golf": "Sport played with clubs and small balls",
-  "Hockey": "Sport played with sticks",
-  "Rugby": "Contact sport played with an oval ball",
-  "Cycling": "Sport using a bicycle",
-  "Wrestling": "Sport involving grappling",
-  "Table Tennis": "Racket sport played on a table",
-  "Futsal": "Indoor version of football",
-  "Running": "Moving quickly on foot",
-  "Archery": "Sport involving bows and arrows",
-  "Skiing": "Sport on snow",
-  "Karate": "Japanese martial art",
-  "Baseball": "Bat-and-ball sport",
-
-  "Mount Everest": "World-famous Himalayan peak",
-  "Kathmandu": "Capital city of Nepal",
-  "Pokhara": "Nepali city known for lakes and mountain views",
-  "Lumbini": "Birthplace of Gautama Buddha",
-  "Pashupatinath": "Famous Hindu temple in Kathmandu",
-  "Dashain": "Major Nepali festival",
-  "Tihar": "Festival of lights in Nepal",
-  "Dhaka Topi": "Traditional Nepali cap",
-  "Gundruk": "Fermented leafy vegetable dish",
-  "Rhododendron": "Nepal's national flower",
-  "Yeti": "Legendary Himalayan creature",
-  "Chitwan": "Nepali region known for its national park",
-  "Janakpur": "City associated with Sita",
-  "Swayambhunath": "Famous hilltop religious site in Kathmandu",
-  "Fewa Lake": "Popular lake in Pokhara",
-  "Sagarmatha": "Nepali name associated with Everest",
-  "Newari Khaja": "Traditional Newari food platter",
-  "Boudhanath": "Famous Buddhist stupa in Kathmandu",
-  "Laligurans": "Nepali name for rhododendron"
+  "Momo": "A popular steamed or fried food.",
+  "Dal Bhat": "A traditional meal.",
+  "Pizza": "Often round and sliced.",
+  "Burger": "Usually served in a bun.",
+  "Sushi": "A Japanese dish.",
+  "Chow Mein": "A noodle dish.",
+  "Sel Roti": "A traditional ring-shaped food.",
+  "Ice Cream": "A cold dessert.",
+  "Chocolate": "A sweet treat.",
+  "Pani Puri": "A crunchy street snack.",
+  "Tiger": "A large wild animal.",
+  "Lion": "Often called the king of the jungle.",
+  "Elephant": "A very large animal with a trunk.",
+  "Dog": "A common household pet.",
+  "Cat": "A pet that often purrs.",
+  "Monkey": "An animal that can climb trees.",
+  "Giraffe": "An animal with a long neck.",
+  "Penguin": "A bird that cannot fly.",
+  "Dolphin": "An intelligent sea animal.",
+  "Panda": "A bear that eats bamboo.",
+  "Red Panda": "A small animal found in the Himalayas.",
+  "Yak": "An animal associated with the Himalayas.",
+  "School": "A place where people learn.",
+  "Hospital": "A place for medical care.",
+  "Airport": "A place where planes arrive and depart.",
+  "Cinema": "A place to watch movies.",
+  "Beach": "A sandy place beside the sea.",
+  "Mountain": "A high natural landform.",
+  "Temple": "A place of worship.",
+  "Phone": "A device used to communicate.",
+  "Laptop": "A portable computer.",
+  "Helmet": "Protective headwear.",
+  "Umbrella": "Used in rain.",
+  "Watch": "Worn to tell time.",
+  "Camera": "Used to take photographs.",
+  "Football": "A sport played with a ball and goals.",
+  "Cricket": "A bat-and-ball sport.",
+  "Basketball": "A sport with hoops.",
+  "Badminton": "A racket sport played with a shuttlecock.",
+  "Futsal": "A form of indoor football.",
+  "Mount Everest": "The world's highest mountain.",
+  "Kathmandu": "The capital city of Nepal.",
+  "Pokhara": "A city famous for its lake and mountain views.",
+  "Lumbini": "The birthplace of Gautama Buddha.",
+  "Pashupatinath": "A famous Hindu temple in Nepal.",
+  "Swayambhunath": "A hilltop religious site in Kathmandu.",
+  "Boudhanath": "A famous Buddhist stupa.",
+  "Chitwan": "A place famous for wildlife.",
+  "Mustang": "A Himalayan region of Nepal.",
+  "Dashain": "A major Nepali festival.",
+  "Tihar": "A festival of lights in Nepal.",
+  "Dhaka Topi": "A traditional Nepali cap.",
+  "Yomari": "A traditional Newari delicacy.",
+  "Dharahara": "A famous tower in Kathmandu."
 };
 
 let players = [];
-let imposters = [];
+let imposterIndexes = [];
 let secretWord = "";
-let current = 0;
-let starter = "";
+let currentPlayer = 0;
 let revealed = false;
-let pressPointerId = null;
-
-const $ = id => document.getElementById(id);
+let gameStarted = false;
 
 function shuffle(array) {
-  const result = [...array];
-
-  for (let i = result.length - 1; i > 0; i--) {
+  for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
-  return result;
-}
-
-function showScreen(screenId) {
-  document.querySelectorAll(".screen").forEach(screen => {
-    screen.classList.remove("active");
-  });
-
-  $(screenId).classList.add("active");
-}
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;"
-  }[char]));
+  return array;
 }
 
 function startGame() {
-  const names = $("playersInput").value
-    .split("\n")
+  const names = document.getElementById("playerNames")
+    .value.split("\n")
     .map(name => name.trim())
     .filter(Boolean);
 
-  const uniqueNames = [...new Set(names)];
-  const imposterCount = Number($("imposterCount").value);
-  const category = $("categorySelect").value;
+  const count = Number(document.getElementById("imposterCount").value);
+  const error = document.getElementById("setupError");
+  error.textContent = "";
 
-  if (uniqueNames.length < 3) {
-    alert("Enter at least 3 different player names.");
+  if (names.length < 3) {
+    error.textContent = "Please enter at least 3 player names.";
     return;
   }
 
-  if (imposterCount >= uniqueNames.length) {
-    alert("There must be at least one non-imposter.");
+  if (new Set(names.map(name => name.toLowerCase())).size !== names.length) {
+    error.textContent = "Please use a different name for each player.";
     return;
   }
 
-  const availableWords = category === "all"
-    ? Object.values(WORDS).flat()
-    : (WORDS[category] || []);
-
-  if (!availableWords.length) {
-    alert("No words found for this category.");
+  if (count >= names.length) {
+    error.textContent = "There must be at least one non-imposter.";
     return;
   }
 
-  players = shuffle(uniqueNames);
+  const category = document.getElementById("category").value;
+  const wordList = WORDS[category];
 
-  secretWord = availableWords[
-    Math.floor(Math.random() * availableWords.length)
-  ];
+  secretWord = wordList[Math.floor(Math.random() * wordList.length)];
+  players = names.map(name => ({
+    name,
+    isImposter: false
+  }));
 
-  imposters = shuffle(players).slice(0, imposterCount);
+  const indexes = shuffle(players.map((_, i) => i));
+  imposterIndexes = indexes.slice(0, count);
 
-  // Randomly choose the player who starts giving clues.
-  starter = players[Math.floor(Math.random() * players.length)];
+  imposterIndexes.forEach(index => {
+    players[index].isImposter = true;
+  });
 
-  current = 0;
+  // Randomize who checks their role first.
+  shuffle(players);
+
+  currentPlayer = 0;
   revealed = false;
-  pressPointerId = null;
+  gameStarted = true;
 
-  showScreen("revealScreen");
+  document.getElementById("setup").classList.add("hidden");
+  document.getElementById("results").classList.add("hidden");
+  document.getElementById("game").classList.remove("hidden");
+
   showPlayer();
 }
 
 function showPlayer() {
   revealed = false;
-  pressPointerId = null;
 
-  $("playerCounter").textContent =
-    `Player ${current + 1} of ${players.length}`;
+  const player = players[currentPlayer];
 
-  $("playerName").textContent =
-    players[current] + " — Hold to Reveal 👆";
+  document.getElementById("turnLabel").textContent =
+    `PLAYER ${currentPlayer + 1} OF ${players.length}`;
 
-  $("roleContent").classList.add("hidden");
-  $("nextButton").classList.add("hidden");
+  document.getElementById("progressBar").style.width =
+    `${(currentPlayer / players.length) * 100}%`;
 
-  $("passCounter").textContent =
-    "Hold your name to reveal. Release to hide.";
+  document.getElementById("playerName").textContent = player.name;
+  document.getElementById("roleContent").classList.add("hidden");
+  document.getElementById("nextButton").classList.add("hidden");
 }
 
 function revealRole(event) {
-  event.preventDefault();
+  if (!gameStarted || revealed) return;
 
-  if (revealed) return;
-
-  revealed = true;
-  pressPointerId = event.pointerId;
-
-  const name = players[current];
-  const isImposter = imposters.includes(name);
-
-  $("roleContent").classList.remove("hidden");
-
-  if (isImposter) {
-    $("roleText").textContent = "IMPOSTER";
-    $("roleText").className = "role imposter";
-
-    const hint = WORD_HINTS[secretWord] ||
-      "Think of something related.";
-
-    $("hintText").textContent =
-      `Category: ${getCategoryName()} · Hint: ${hint}`;
-  } else {
-    $("roleText").textContent = secretWord;
-    $("roleText").className = "role normal";
-
-    $("hintText").textContent =
-      `Category: ${getCategoryName()}. Give clues without saying the word.`;
+  if (event) {
+    event.preventDefault();
   }
 
-  $("nextButton").classList.remove("hidden");
-  $("passCounter").textContent =
-    "Release to hide your role before passing the phone.";
+  revealed = true;
+
+  const player = players[currentPlayer];
+  const roleText = document.getElementById("roleText");
+  const hintText = document.getElementById("hintText");
+
+  if (player.isImposter) {
+    roleText.textContent = "🕵️ IMPOSTER";
+    hintText.textContent =
+      "Hint: " + (WORD_HINTS[secretWord] || "Try to blend in and guess the word.");
+  } else {
+    roleText.textContent = "🟢 " + secretWord;
+    hintText.textContent = "You know the secret word. Keep it hidden!";
+  }
+
+  document.getElementById("roleContent").classList.remove("hidden");
+  document.getElementById("nextButton").classList.remove("hidden");
 }
 
 function hideRole() {
-  $("roleContent").classList.add("hidden");
-}
-
-function getCategoryName() {
-  const selected = $("categorySelect").value;
-
-  if (selected === "all") {
-    for (const [category, words] of Object.entries(WORDS)) {
-      if (words.includes(secretWord)) {
-        return category.charAt(0).toUpperCase() + category.slice(1);
-      }
-    }
-  }
-
-  return selected.charAt(0).toUpperCase() + selected.slice(1);
+  document.getElementById("roleContent").classList.add("hidden");
 }
 
 function nextPlayer() {
   if (!revealed) return;
 
   hideRole();
+  currentPlayer++;
 
-  if (current < players.length - 1) {
-    current++;
-    showPlayer();
-  } else {
+  if (currentPlayer >= players.length) {
     showResults();
+  } else {
+    showPlayer();
   }
 }
 
 function showResults() {
-  $("resultWord").textContent = secretWord;
+  gameStarted = false;
 
-  $("imposterNames").innerHTML = imposters
-    .map(name => `<li>${escapeHTML(name)}</li>`)
-    .join("");
+  document.getElementById("game").classList.add("hidden");
+  document.getElementById("results").classList.remove("hidden");
 
-  $("starterName").textContent = starter;
+  document.getElementById("progressBar").style.width = "100%";
+  document.getElementById("resultWord").textContent = secretWord;
 
-  showScreen("resultScreen");
+  const imposters = players
+    .filter(player => player.isImposter)
+    .map(player => player.name);
+
+  document.getElementById("resultImposters").textContent =
+    imposters.join(", ");
+
+  const starter = players[Math.floor(Math.random() * players.length)];
+  document.getElementById("starterName").textContent = starter.name;
 }
 
-function startNewRound() {
-  startGame();
+function newGame() {
+  document.getElementById("results").classList.add("hidden");
+  document.getElementById("setup").classList.remove("hidden");
+  document.getElementById("setupError").textContent = "";
 }
 
-function showSetup() {
-  showScreen("setupScreen");
+function changeSettings() {
+  newGame();
 }
 
-// Always hide the role if the finger is released anywhere on the screen.
-document.addEventListener("pointerup", hideRole);
-document.addEventListener("pointercancel", hideRole);
+// Prevent iPhone long-press text selection and selection callouts.
+document.addEventListener("selectstart", function(event) {
+  if (event.target.closest("#playerName, #roleContent, #results")) {
+    event.preventDefault();
+  }
+});
 
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) hideRole();
+document.addEventListener("contextmenu", function(event) {
+  if (event.target.closest("#playerName, #roleContent, #results")) {
+    event.preventDefault();
+  }
 });
 </script>
 </body>
 </html>
-

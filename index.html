@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -244,82 +243,82 @@ footer {
   <!-- SETUP -->
   <section id="setup" class="panel">
 
-    <label for="category">Choose category</label>
-    <select id="category">
-      <option value="all">🎲 All Categories</option>
-      <option value="food">🍕 Food</option>
-      <option value="animals">🐾 Animals</option>
-      <option value="places">🌍 Places</option>
-      <option value="objects">📦 Objects</option>
-      <option value="sports">⚽ Sports</option>
-      <option value="nepal">🇳🇵 Nepal</option>
-      <option value="movies">🎬 Bollywood Movies</option>
-    </select>
+<label for="category">Choose category</label>
+<select id="category">
+  <option value="all">🎲 All Categories</option>
+  <option value="food">🍕 Food</option>
+  <option value="animals">🐾 Animals</option>
+  <option value="places">🌍 Places</option>
+  <option value="objects">📦 Objects</option>
+  <option value="sports">⚽ Sports</option>
+  <option value="nepal">🇳🇵 Nepal</option>
+  <option value="movies">🎬 Bollywood Movies</option>
+</select>
 
-    <label for="playerNames">Player names</label>
-    <textarea id="playerNames"
-      placeholder="One name per line&#10;Prakash&#10;Prashesh&#10;Suman"></textarea>
-    <div class="small">Enter at least 3 players, one name per line.</div>
+<label for="playerNames">Player names</label>
+<textarea id="playerNames"
+  placeholder="One name per line&#10;Prakash&#10;Prashesh&#10;Suman"></textarea>
+<div class="small">Enter at least 3 players, one name per line.</div>
 
-    <label for="imposterCount">Number of imposters</label>
-    <select id="imposterCount">
-      <option value="1">1 Imposter</option>
-      <option value="2">2 Imposters</option>
-      <option value="3">3 Imposters</option>
-    </select>
+<label for="imposterCount">Number of imposters</label>
+<select id="imposterCount">
+  <option value="1">1 Imposter</option>
+  <option value="2">2 Imposters</option>
+  <option value="3">3 Imposters</option>
+</select>
 
-    <label class="hint-setting" for="enableHints">
-      <span>
-        <span class="setting-title">💡 Enable Hints</span>
-        <small>Show imposters a clue automatically when they reveal their role.</small>
-      </span>
-      <input type="checkbox" id="enableHints" checked>
-    </label>
+<label class="hint-setting" for="enableHints">
+  <span>
+    <span class="setting-title">💡 Enable Hints</span>
+    <small>Show imposters a clue automatically when they reveal their role.</small>
+  </span>
+  <input type="checkbox" id="enableHints" checked>
+</label>
 
-    <div id="setupError" class="error"></div>
-    <button class="primary" onclick="startGame()">Start Game</button>
+<div id="setupError" class="error"></div>
+<button class="primary" onclick="startGame()">Start Game</button>
   </section>
 
   <!-- GAME -->
   <section id="game" class="panel hidden">
 
-    <div class="small" id="turnLabel"></div>
+<div class="small" id="turnLabel"></div>
 
-    <div class="progress">
-      <div id="progressBar"></div>
-    </div>
+<div class="progress">
+  <div id="progressBar"></div>
+</div>
 
-    <p class="small">Pass the phone to the player below.</p>
+<p class="small">Pass the phone to the player below.</p>
 
-    <button
-      id="playerName"
-      class="primary"
-      onpointerdown="revealRole(event)"
-      onpointerup="hideRole()"
-      onpointerleave="hideRole()"
-      onpointercancel="hideRole()"
-      oncontextmenu="return false">
-      Hold to Reveal
-    </button>
+<button
+  id="playerName"
+  class="primary"
+  onpointerdown="revealRole(event)"
+  onpointerup="hideRole()"
+  onpointerleave="hideRole()"
+  onpointercancel="hideRole()"
+  oncontextmenu="return false">
+  Hold to Reveal
+</button>
 
-    <div id="roleContent" class="hidden">
-      <div class="role-label">Your secret role</div>
-      <div id="roleText"></div>
+<div id="roleContent" class="hidden">
+  <div class="role-label">Your secret role</div>
+  <div id="roleText"></div>
 
-      <div id="hintArea" class="hidden">
-        <div class="role-label">💡 Your Hint</div>
-        <div id="hintText"></div>
-      </div>
-    </div>
+  <div id="hintArea" class="hidden">
+    <div class="role-label">💡 Your Hint</div>
+    <div id="hintText"></div>
+  </div>
+</div>
 
-    <p class="small">Hold your name to see your role. Release to hide it.</p>
+<p class="small">Hold your name to see your role. Release to hide it.</p>
 
-    <button
-      id="nextButton"
-      class="secondary hidden"
-      onclick="nextPlayer()">
-      Hide &amp; Next Player →
-    </button>
+<button
+  id="nextButton"
+  class="secondary hidden"
+  onclick="nextPlayer()">
+  Hide &amp; Next Player →
+</button>
   </section>
 
   <!-- RESULTS -->
@@ -327,23 +326,23 @@ footer {
     <h2>🎭 Game Ready!</h2>
     <p class="small">Discuss clues and find the imposters.</p>
 
-    <div class="result-card">
-      <div class="small">THE SECRET WORD</div>
-      <div id="resultWord" class="result-word"></div>
-    </div>
+<div class="result-card">
+  <div class="small">THE SECRET WORD</div>
+  <div id="resultWord" class="result-word"></div>
+</div>
 
-    <div class="result-card">
-      <strong>🕵️ Imposter(s)</strong>
-      <div id="resultImposters"></div>
-    </div>
+<div class="result-card">
+  <strong>🕵️ Imposter(s)</strong>
+  <div id="resultImposters"></div>
+</div>
 
-    <div class="result-card">
-      <strong>🎤 Who starts giving clues?</strong>
-      <div id="starterName"></div>
-    </div>
+<div class="result-card">
+  <strong>🎤 Who starts giving clues?</strong>
+  <div id="starterName"></div>
+</div>
 
-    <button class="primary" onclick="newGame()">Play Again</button>
-    <button class="secondary" onclick="changeSettings()">Change Settings</button>
+<button class="primary" onclick="newGame()">Play Again</button>
+<button class="secondary" onclick="changeSettings()">Change Settings</button>
   </section>
 
   <footer>Keep your role secret. Don't let anyone peek!</footer>
@@ -1003,393 +1002,6 @@ const WORDS = {
     "Piku",
     "Wazir",
     "102 Not Out",
-    "Khakee",
-    "Black",
-    "Aankhen",
-    "Mohabbatein",
-    "Kabhi Alvida Naa Kehna",
-    "Veer-Zaara",
-    "Kal Ho Naa Ho",
-    "Kuch Kuch Hota Hai",
-    "Kabhi Khushi Kabhie Gham",
-    "My Name Is Khan",
-    "Student of the Year",
-    "Ae Dil Hai Mushkil",
-    "Brahmastra",
-    "Rocky Aur Rani Kii Prem Kahaani",
-    "Karan Arjun",
-    "Koyla",
-    "Khalnayak",
-    "Trimurti",
-    "Pardes",
-    "Guddu",
-    "Anjaam",
-    "Dilwale",
-    "Baazigar",
-    "Darr",
-    "Yes Boss",
-    "Duplicate",
-    "Josh",
-    "Phir Bhi Dil Hai Hindustani",
-    "Asoka",
-    "Devdas",
-    "Swades",
-    "Chak De! India",
-    "Rab Ne Bana Di Jodi",
-    "Billu",
-    "Ra.One",
-    "Jab Tak Hai Jaan",
-    "Happy New Year",
-    "Fan",
-    "Zero",
-    "Pathaan",
-    "Jawan",
-    "Dunki",
-    "King",
-    "Om Shanti Om",
-    "Main Hoon Na",
-    "Kal Ho Naa Ho",
-    "Veer-Zaara",
-    "Chennai Express",
-    "Dilwale",
-    "Dear Zindagi",
-    "Raees",
-    "Jab Harry Met Sejal",
-    "Kabhi Haan Kabhi Naa",
-    "Baadshah",
-    "Karan Arjun",
-    "Josh",
-    "Devdas",
-    "Swades",
-    "Don",
-    "Don 2",
-    "Happy New Year",
-    "Fan",
-    "Ra.One",
-    "Jawan",
-    "Pathaan",
-    "Dunki",
-    "Brahmastra",
-    "War",
-    "Fighter",
-    "Bang Bang!",
-    "Vikram Vedha",
-    "Kaabil",
-    "Kaho Naa... Pyaar Hai",
-    "Koi... Mil Gaya",
-    "Krrish",
-    "Krrish 3",
-    "Guzaarish",
-    "Jodhaa Akbar",
-    "Dhoom 2",
-    "Zindagi Na Milegi Dobara",
-    "Lakshya",
-    "Mission Kashmir",
-    "Fiza",
-    "Karan Arjun",
-    "Koyla",
-    "Gadar: Ek Prem Katha",
-    "Gadar 2",
-    "Apne",
-    "The Hero: Love Story of a Spy",
-    "Hero: Love Story of a Spy",
-    "Border",
-    "LOC Kargil",
-    "Refugee",
-    "Bhaag Milkha Bhaag",
-    "Mary Kom",
-    "Panga",
-    "Chakda Xpress",
-    "Dangal",
-    "Sultan",
-    "Jersey",
-    "Gold",
-    "83",
-    "Iqbal",
-    "Lagaan",
-    "Chak De! India",
-    "M.S. Dhoni: The Untold Story",
-    "Shershaah",
-    "Sam Bahadur",
-    "Uri: The Surgical Strike",
-    "Airlift",
-    "Baby",
-    "Holiday",
-    "Special 26",
-    "Madras Cafe",
-    "Raazi",
-    "Neerja",
-    "Talvar",
-    "No One Killed Jessica",
-    "Kahaani",
-    "Kahaani 2",
-    "Badla",
-    "Drishyam",
-    "Drishyam 2",
-    "Andhadhun",
-    "Raman Raghav 2.0",
-    "Ugly",
-    "Talaash",
-    "A Wednesday!",
-    "Johnny Gaddaar",
-    "Ittefaq",
-    "Raat Akeli Hai",
-    "Monica, O My Darling",
-    "Jaane Jaan",
-    "Merry Christmas",
-    "Khel Khel Mein",
-    "Raid",
-    "Raid 2",
-    "Bunty Aur Babli",
-    "Bunty Aur Babli 2",
-    "Bhediya",
-    "Stree",
-    "Stree 2",
-    "Roohi",
-    "Munjya",
-    "Bhool Bhulaiyaa 3",
-    "Bhool Bhulaiyaa",
-    "Bhool Bhulaiyaa 2",
-    " भूल Bhulaiyaa",
-    "Welcome",
-    "Welcome Back",
-    "Hera Pheri",
-    "Phir Hera Pheri",
-    "Hungama",
-    "Garam Masala",
-    "Dhol",
-    "De Dana Dan",
-    "Bhagam Bhag",
-    "Dhamaal",
-    "Double Dhamaal",
-    "Total Dhamaal",
-    "All the Best",
-    "Golmaal",
-    "Golmaal Returns",
-    "Golmaal 3",
-    "Golmaal Again",
-    "Bol Bachchan",
-    "Housefull",
-    "Housefull 2",
-    "Housefull 3",
-    "Housefull 4",
-    "Jolly LLB",
-    "Jolly LLB 2",
-    "OMG: Oh My God!",
-    "OMG 2",
-    "Aankhen",
-    "Andaz Apna Apna",
-    "Chup Chup Ke",
-    "Khatta Meetha",
-    "Malamaal Weekly",
-    "Partner",
-    "Ready",
-    "No Entry",
-    "Masti",
-    "Grand Masti",
-    "Fukrey",
-    "Fukrey Returns",
-    "Fukrey 3",
-    "Dream Girl",
-    "Dream Girl 2",
-    "Bala",
-    "Bareilly Ki Barfi",
-    "Luka Chuppi",
-    "Pati Patni Aur Woh",
-    "Sonu Ke Titu Ki Sweety",
-    "Pyaar Ka Punchnama",
-    "Pyaar Ka Punchnama 2",
-    "Tu Jhoothi Main Makkaar",
-    "De De Pyaar De",
-    "Thank You",
-    "Aitraaz",
-    "Mujhse Shaadi Karogi",
-    "Maine Pyaar Kyun Kiya",
-    "Dulhe Raja",
-    "Haseena Maan Jaayegi",
-    "Hero No. 1",
-    "Coolie No. 1",
-    "Biwi No. 1",
-    "Judwaa",
-    "Judwaa 2",
-    "Judaai",
-    "Raja Babu",
-    "Saajan Chale Sasural",
-    "Bade Miyan Chote Miyan",
-    "Coolie",
-    "Naseeb",
-    "Amar Akbar Anthony",
-    "Muqaddar Ka Sikandar",
-    "Don",
-    "Sharaabi",
-    "Namak Halaal",
-    "Satte Pe Satta",
-    "Mr. Natwarlal",
-    "Laawaris",
-    "Shahenshah",
-    "Agneepath",
-    "Hum",
-    "Khuda Gawah",
-    "Mohra",
-    "Khiladi",
-    "Main Khiladi Tu Anari",
-    "Sabse Bada Khiladi",
-    "Khiladiyon Ka Khiladi",
-    "Dhadkan",
-    "Haan Maine Bhi Pyaar Kiya",
-    "Andaaz",
-    "Namastey London",
-    "Singh Is Kinng",
-    "Patiala House",
-    "Holiday",
-    "Airlift",
-    "Rustom",
-    "Kesari",
-    "Mission Mangal",
-    "Sooryavanshi",
-    "Bachchhan Paandey",
-    "Raksha Bandhan",
-    "Ram Setu",
-    "Selfiee",
-    "Sarfira",
-    "Sky Force",
-    "Jolly LLB 3",
-    "Baby",
-    "Gabbar Is Back",
-    "Special 26",
-    "Rowdy Rathore",
-    "Boss",
-    "Brothers",
-    "Housefull 2",
-    "Entertainment",
-    "Ajnabee",
-    "Aankhen",
-    "Waqt: The Race Against Time",
-    "Bhool Bhulaiyaa",
-    "Deewane Huye Paagal",
-    "Garam Masala",
-    "Phir Hera Pheri",
-    "Namastey London",
-    "Singh Is Kinng",
-    "Welcome",
-    "Blue",
-    "Action Replayy",
-    "Patiala House",
-    "Housefull 2",
-    "Special 26",
-    "Baby",
-    "Airlift",
-    "Rustom",
-    "Pad Man",
-    "Kesari",
-    "Mission Mangal",
-    "Bell Bottom",
-    "Sooryavanshi",
-    "Raksha Bandhan",
-    "OMG 2",
-    "Bade Miyan Chote Miyan",
-    "Sarfira",
-    "Sky Force",
-    "Sitaare Zameen Par",
-    "Dhadkan",
-    "Dhadak",
-    "Ishq",
-    "Raja Hindustani",
-    "Dil",
-    "Beta",
-    "Saajan",
-    "Deewana",
-    "Baazigar",
-    "Darr",
-    "Anjaam",
-    "Koyla",
-    "Karan Arjun",
-    "Pardes",
-    "Duplicate",
-    "Yes Boss",
-    "Kuch Kuch Hota Hai",
-    "Baadshah",
-    "Josh",
-    "Har Dil Jo Pyar Karega",
-    "Chalte Chalte",
-    "Main Hoon Na",
-    "Veer-Zaara",
-    "Kabhi Alvida Naa Kehna",
-    "Om Shanti Om",
-    "Rab Ne Bana Di Jodi",
-    "My Name Is Khan",
-    "Jab Tak Hai Jaan",
-    "Happy New Year",
-    "Dilwale",
-    "Fan",
-    "Raees",
-    "Zero",
-    "Pathaan",
-    "Jawan",
-    "Dunki",
-    "Kuch Kuch Hota Hai",
-    "Dilwale Dulhania Le Jayenge",
-    "Kabhi Khushi Kabhie Gham",
-    "Kal Ho Naa Ho",
-    "Veer-Zaara",
-    "Mohabbatein",
-    "Kabhi Alvida Naa Kehna",
-    "My Name Is Khan",
-    "Student of the Year",
-    "Ae Dil Hai Mushkil",
-    "Brahmastra",
-    "Rocky Aur Rani Kii Prem Kahaani",
-    "Jigra",
-    "Alia Bhatt's Highway",
-    "Highway",
-    "Raazi",
-    "Dear Zindagi",
-    "Gangubai Kathiawadi",
-    "Darlings",
-    "Badrinath Ki Dulhania",
-    "Humpty Sharma Ki Dulhania",
-    "2 States",
-    "Kapoor & Sons",
-    "Shaandaar",
-    "Udta Punjab",
-    "Kalank",
-    "RRR",
-    "Pushpa",
-    "Pushpa 2",
-    "Baahubali",
-    "Baahubali 2",
-    "KGF",
-    "KGF Chapter 2",
-    "Kantara",
-    "Vikram",
-    "Jailer",
-    "Leo",
-    "Salaar",
-    "Devara",
-    "Hanu-Man",
-    "Kalki 2898 AD",
-    "Sita Ramam",
-    "Arjun Reddy",
-    "Kabir Singh",
-    "Animal",
-    "Bajrangi Bhaijaan",
-    "Dangal",
-    "Sultan",
-    "PK",
-    "Sanju",
-    "3 Idiots",
-    "Lagaan",
-    "Taare Zameen Par",
-    "Ghajini",
-    "Secret Superstar",
-    "Dhoom 3",
-    "Talaash",
-    "Laal Singh Chaddha",
-    "Rang De Basanti",
-    "Dil Chahta Hai",
-    "Fanaa",
-    "Sarfarosh",
-    "Jo Jeeta Wohi Sikandar",
     "Qayamat Se Qayamat Tak",
     "Hum Hain Rahi Pyar Ke",
     "Andaz Apna Apna",
@@ -2037,6 +1649,76 @@ const WORD_HINTS = {
   "Manakamana": "A famous temple in Nepal."
 };
 
+const MOVIE_HINTS = {
+  "3 Idiots": "Three engineering students navigate college life and friendship.",
+  "Dangal": "A father trains his daughters to become champion wrestlers.",
+  "PK": "An outsider asks questions about human beliefs and customs.",
+  "Lagaan": "Villagers challenge British officers to a cricket match.",
+  "Taare Zameen Par": "A teacher helps a child who struggles at school.",
+  "Munna Bhai M.B.B.S.": "A lovable gangster tries to become a doctor.",
+  "Sholay": "Two criminals are hired to capture a feared bandit.",
+  "Don": "A criminal mastermind is impersonated by an ordinary man.",
+  "Dilwale Dulhania Le Jayenge": "A couple fall in love while traveling through Europe.",
+  "Kuch Kuch Hota Hai": "A college friendship becomes a love story.",
+  "Kabhi Khushi Kabhie Gham": "A wealthy family faces separation and reunion.",
+  "Kal Ho Naa Ho": "A cheerful neighbor changes the lives of a family.",
+  "Chak De! India": "A disgraced coach leads a women's hockey team.",
+  "Swades": "An Indian scientist returns to his village from abroad.",
+  "Jab We Met": "A chance train journey brings two very different people together.",
+  "Rockstar": "A musician's heartbreak shapes his rise to fame.",
+  "Barfi!": "A charming deaf and mute young man finds love and friendship.",
+  "Yeh Jawaani Hai Deewani": "Friends reunite years after a mountain trip.",
+  "Zindagi Na Milegi Dobara": "Three friends take a road trip across Spain.",
+  "Queen": "A young woman takes her honeymoon trip alone.",
+  "Drishyam": "A father uses his love of films to protect his family.",
+  "Andhadhun": "A pianist gets caught up in a murder mystery.",
+  "Tumbbad": "A family searches for a mythical treasure.",
+  "Stree": "A small town is haunted by a mysterious woman.",
+  "Bhool Bhulaiyaa": "A haunted mansion inspires a strange investigation.",
+  "Hera Pheri": "Three men get caught in a kidnapping mix-up.",
+  "Chennai Express": "A train journey leads to adventure in South India.",
+  "Om Shanti Om": "A film extra is reborn and seeks justice.",
+  "Pathaan": "A spy returns to stop a dangerous enemy.",
+  "Jawan": "A vigilante takes on corruption and injustice.",
+  "Dunki": "Friends attempt a difficult journey to reach another country.",
+  "War": "Two elite agents face off in a high-stakes action story.",
+  "Ek Tha Tiger": "A secret agent falls in love during an assignment.",
+  "Bajrangi Bhaijaan": "A kind man helps a lost child reunite with her family.",
+  "Dabangg": "A fearless, unconventional police officer fights crime.",
+  "Baahubali: The Beginning": "A young warrior discovers his royal past.",
+  "Baahubali 2: The Conclusion": "A prince seeks answers about his father's death.",
+  "Pushpa": "A sandalwood smuggler rises through a forest underworld.",
+  "KGF": "A man seeks power in a dangerous gold-mining empire.",
+  "Krrish": "A young man with extraordinary abilities becomes a hero.",
+  "Dhoom": "Police chase a stylish gang of motorcycle thieves.",
+  "Devdas": "A tragic love story about a man unable to forget his first love.",
+  "Gangubai Kathiawadi": "A young woman rises to power in Mumbai.",
+  "Bajirao Mastani": "A warrior and a princess are drawn into a forbidden romance.",
+  "Padmaavat": "A queen faces a powerful ruler's obsession.",
+  "Rang De Basanti": "Young friends are inspired to challenge injustice.",
+  "Bhaag Milkha Bhaag": "A runner overcomes hardship to become a champion.",
+  "Chhichhore": "Old friends look back on their college days.",
+  "M.S. Dhoni: The Untold Story": "A small-town boy rises to cricketing fame.",
+  "Uri: The Surgical Strike": "Soldiers plan a mission after an attack on their base.",
+  "Shershaah": "A young army officer's story unfolds during wartime.",
+  "Airlift": "An Indian businessman helps evacuate people from a war zone.",
+  "Neerja": "A flight attendant shows courage during a hijacking.",
+  "Raazi": "A young woman is sent undercover across the border.",
+  "Pink": "A courtroom drama explores consent and justice.",
+  "OMG: Oh My God!": "A shopkeeper takes a case against God after a disaster.",
+  "Jolly LLB": "A struggling lawyer takes on a powerful courtroom case.",
+  "Gully Boy": "A young rapper finds his voice in Mumbai.",
+  "12th Fail": "A young man keeps trying to pass a major civil service exam.",
+  "Laapataa Ladies": "Two brides get mixed up during a train journey.",
+  "Crew": "Three flight attendants get caught in a gold-smuggling scheme.",
+  "Stree 2": "A town's residents face the return of a mysterious threat.",
+  "Mughal-e-Azam": "A prince's forbidden love challenges an emperor.",
+  "Mother India": "A village mother struggles to raise her sons through hardship.",
+  "Anand": "A joyful man faces a serious illness with optimism.",
+  "Mr. India": "A kind man discovers an invisibility device.",
+  "Gadar: Ek Prem Katha": "A truck driver crosses borders to reunite with his family."
+};
+
 let players = [];
 let secretWord = "";
 let currentPlayer = 0;
@@ -2140,6 +1822,7 @@ function revealRole(event) {
 
     if (hintsEnabled) {
       document.getElementById("hintText").textContent =
+        MOVIE_HINTS[secretWord] ||
         WORD_HINTS[secretWord] ||
         "Try to blend in and guess the word.";
 
